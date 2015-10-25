@@ -12,7 +12,7 @@ DB_PASS=${DB_PASS:-}
 DB_LOCALE=${DB_LOCALE:-C}
 DB_UNACCENT=${DB_UNACCENT:false}
 DB_TSEARCH_EXT=${DB_TSEARCH_EXT:true}
-
+DB_ROOT_PASS=${DB_ROOT_PASS:-$DB_PASS}
 # by default postgresql will start up as a standalone instance.
 # set this environment variable to master, slave or snapshot to use replication features.
 # "snapshot" will create a point in time backup of a master instance.
@@ -245,6 +245,12 @@ if [[ ${PSQL_MODE} == standalone || ${PSQL_MODE} == master ]]; then
       fi
     done
   fi
+fi
+
+if [[ -n $DB_ROOT_PASS ]]; then
+    echo "ALTER USER postgres '${DB_ROOT_PASS}';" |
+      sudo -Hu ${PG_USER} ${PG_BINDIR}/postgres --single \
+        -D ${PG_DATADIR} -c config_file=${PG_CONFDIR}/postgresql.conf >/dev/null
 fi
 
 echo "Starting PostgreSQL server..."
