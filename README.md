@@ -1,5 +1,5 @@
 #docker-zulip-postgresql-tsearchextras
-[![Docker Repository on Quay.io](https://quay.io/repository/galexrt/docker-zulip-postgresql-tsearchextras/status "Docker Repository on Quay.io")](https://quay.io/repository/galexrt/docker-zulip-postgresql-tsearchextras)
+[![Docker Repository on Quay.io](https://quay.io/repository/galexrt/zulip-postgresql-tsearchextras/status "Docker Repository on Quay.io")](https://quay.io/repository/galexrt/zulip-postgresql-tsearchextras)
 
 This is the sameersbn/postgresql image with the zulip postgressql-9.3/9.4-tsearch-extras installed.
 
@@ -62,7 +62,7 @@ In your issue report please make sure you provide the following information:
 
 # Installation
 
-Automated builds of the image are available on [Quay.io](https://quay.io/repository/galexrt/docker-zulip-postgresql-tsearchextras) and is the recommended method of 
+Automated builds of the image are available on [Quay.io](https://quay.io/repository/galexrt/docker-zulip-postgresql-tsearchextras) and is the recommended method of
 installation.
 
 ```bash
