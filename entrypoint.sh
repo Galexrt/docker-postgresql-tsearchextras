@@ -232,7 +232,7 @@ if [[ ${PSQL_MODE} == standalone || ${PSQL_MODE} == master ]]; then
       fi
 
       if [[ ${PSQL_CREATE_TSEARCH_EXT} == true ]]; then
-        echo "Installing tsearch extension for \"${db}\"..."
+        echo "Installing tsearch_extras extension for \"${db}\"..."
         echo "CREATE EXTENSION IF NOT EXISTS tsearch_extras SCHEMA ${db};" | \
           sudo -Hu ${PG_USER} ${PG_BINDIR}/postgres --single ${db} \
             -D ${PG_DATADIR} -c config_file=${PG_CONFDIR}/postgresql.conf >/dev/null
