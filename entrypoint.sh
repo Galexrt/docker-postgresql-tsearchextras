@@ -239,7 +239,7 @@ if [[ ${PSQL_MODE} == standalone || ${PSQL_MODE} == master ]]; then
 
       if [[ -n ${DB_USER} ]]; then
         echo "Granting access to database \"${db}\" for user \"${DB_USER}\"..."
-        echo "GRANT ALL PRIVILEGES ON DATABASE \"${db}\" to \"${DB_USER}\";" |
+        echo "GRANT ALL PRIVILEGES ON DATABASE \"${db}\" TO \"${DB_USER}\";" |
           sudo -Hu ${PG_USER} ${PG_BINDIR}/postgres --single \
             -D ${PG_DATADIR} -c config_file=${PG_CONFDIR}/postgresql.conf >/dev/null
       fi
