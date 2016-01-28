@@ -23,8 +23,9 @@ RUN wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add 
  && ln -sf ${PG_DATADIR}/postgresql.conf /etc/postgresql/${PG_VERSION}/main/postgresql.conf \
  && ln -sf ${PG_DATADIR}/pg_hba.conf /etc/postgresql/${PG_VERSION}/main/pg_hba.conf \
  && ln -sf ${PG_DATADIR}/pg_ident.conf /etc/postgresql/${PG_VERSION}/main/pg_ident.conf \
- && ln -sf /usr/share/postgresql/9.3/extension/tsearch_extras.control /usr/share/postgresql/9.4/extension/tsearch_extras.control \
- && ln -sf /usr/lib/postgresql/9.3/lib/tsearch_extras.so /usr/lib/postgresql/9.4/lib/tsearch_extras.so \
+ && ln -sf /usr/share/postgresql/9.3/extension/tsearch_extras.control /usr/share/postgresql/$PG_VERSION/extension/tsearch_extras.control \
+ && ln -sf /usr/lib/postgresql/9.3/lib/tsearch_extras.so /usr/lib/postgresql/$PG_VERSION/lib/tsearch_extras.so \
+ && ln -sf /var/cache/postgresql/dicts/en_us.dict /usr/share/postgresql/$PG_VERSION/tsearch_data/en_us.dict \
  && rm -rf ${PG_HOME} \
  && rm -rf /var/lib/apt/lists/* \
 
