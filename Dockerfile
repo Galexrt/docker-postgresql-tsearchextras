@@ -28,11 +28,11 @@ RUN wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add 
  && ln -sf /var/cache/postgresql/dicts/en_us.dict /usr/share/postgresql/$PG_VERSION/tsearch_data/en_us.dict \
  && ln -sf /usr/share/postgresql/9.3/tsearch_data/en_us.affix /usr/share/postgresql/$PG_VERSION/tsearch_data/en_us.affix \
  && rm -rf ${PG_HOME} \
- && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY runtime/ ${PG_APP_HOME}/
 COPY entrypoint.sh /sbin/entrypoint.sh
-COPY zulip_english.stop /usr/share/postgresql/9.3/tsearch_data/zulip_english.stop
+COPY zulip_english.stop /usr/share/postgresql/9.4/tsearch_data/zulip_english.stop
 
 EXPOSE 5432/tcp
 VOLUME ["${PG_HOME}", "${PG_RUNDIR}"]
