@@ -259,8 +259,8 @@ trust_localnet() {
 }
 
 set_resolvconf_perms() {
-  echo "Setting resolv ACLs..."
-  setfacl -m user:${PG_USER}:r /etc/resolv.conf
+  echo "Setting resolv.conf ACLs..."
+  setfacl -m user:${PG_USER}:r /etc/resolv.conf || true
 }
 
 configure_recovery() {
@@ -305,6 +305,30 @@ create_user() {
   fi
 }
 
+load_extensions() {
+  local database=${1?missing argument}
+
+  if [[ ${DB_UNACCENT} == true ]]; then
+    echo
+    echo "WARNING: "
+    echo "  The DB_UNACCENT option will be deprecated in favour of DB_EXTENSION soon."
+    echo "  Please migrate to using DB_EXTENSION"
+    echo
+    echo "‣ Loading unaccent extension..."
+    psql -U ${PG_USER} -d ${database} -c "CREATE EXTENSION IF NOT EXISTS unaccent;" >/dev/null 2>&1
+  fi
+
+  for extension in $(awk -F',' '{for (i = 1 ; i <= NF ; i++) print $i}' <<< "${DB_EXTENSION}"); do
+    echo "‣ Loading ${extension} extension..."
+    psql -U ${PG_USER} -d ${database} -c "CREATE EXTENSION IF NOT EXISTS ${extension};" >/dev/null 2>&1
+  done
+}
+
+load_textsearch() {
+    psql -U ${PG_USER} -c "CREATE SCHEMA zulip AUTHORIZATION zulip;" zulip >/dev/null
+    psql -U ${PG_USER} -c "CREATE EXTENSION tsearch_extras SCHEMA zulip;" zulip >/dev/null
+}
+
 create_database() {
   if [[ -n ${DB_NAME} ]]; then
     case $REPLICATION_MODE in
@@ -318,11 +342,9 @@ create_database() {
             psql -U ${PG_USER} -c "CREATE DATABASE \"${database}\" WITH TEMPLATE = \"${DB_TEMPLATE}\";" >/dev/null
           fi
 
-          if [[ ${DB_UNACCENT} == true ]]; then
-            echo "‣ Loading unaccent extension..."
-            psql -U ${PG_USER} -d ${database} -c "CREATE EXTENSION IF NOT EXISTS unaccent;" >/dev/null 2>&1
-          fi
+          load_extensions ${database}
 
+          load_textsearch
           if [[ -n ${DB_USER} ]]; then
             echo "‣ Granting access to ${DB_USER} user..."
             psql -U ${PG_USER} -c "GRANT ALL PRIVILEGES ON DATABASE \"${database}\" to \"${DB_USER}\";" >/dev/null

@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20160121
+FROM sameersbn/ubuntu:14.04.20160416
 MAINTAINER galexrt@googlemail.com
 
 ENV PG_APP_HOME="/etc/docker-postgresql"\
@@ -12,7 +12,7 @@ ENV PG_APP_HOME="/etc/docker-postgresql"\
 ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin \
     PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
 
-RUN wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
  && wget -qO - https://zulip.com/dist/keys/zulip-ppa.asc | apt-key add - \
  && echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
  && echo "deb http://ppa.launchpad.net/tabbott/zulip/ubuntu trusty main" > /etc/apt/sources.list.d/zulip.list \

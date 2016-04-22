@@ -32,3 +32,4 @@ if [[ -z ${1} ]]; then
 else
   exec "$@"
 fi
+

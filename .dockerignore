@@ -1,4 +1,5 @@
-.git/
+.git
+circle.yml
 LICENSE
 VERSION
 README.md
