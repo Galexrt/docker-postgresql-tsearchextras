@@ -2,7 +2,7 @@ FROM sameersbn/ubuntu:14.04.20160416
 MAINTAINER galexrt@googlemail.com
 
 ENV PG_APP_HOME="/etc/docker-postgresql"\
-    PG_VERSION=9.4 \
+    PG_VERSION=9.3 \
     PG_USER=postgres \
     PG_HOME=/var/lib/postgresql \
     PG_RUNDIR=/run/postgresql \
@@ -23,8 +23,6 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
  && ln -sf ${PG_DATADIR}/postgresql.conf /etc/postgresql/${PG_VERSION}/main/postgresql.conf \
  && ln -sf ${PG_DATADIR}/pg_hba.conf /etc/postgresql/${PG_VERSION}/main/pg_hba.conf \
  && ln -sf ${PG_DATADIR}/pg_ident.conf /etc/postgresql/${PG_VERSION}/main/pg_ident.conf \
- && ln -sf /usr/share/postgresql/9.3/extension/tsearch_extras* "/usr/share/postgresql/$PG_VERSION/extension/" \
- && ln -sf /usr/lib/postgresql/9.3/lib/tsearch_extras.so "/usr/lib/postgresql/$PG_VERSION/lib/tsearch_extras.so" \
  && ln -sf /var/cache/postgresql/dicts/en_us.dict "/usr/share/postgresql/$PG_VERSION/tsearch_data/en_us.dict" \
  && ln -sf /var/cache/postgresql/dicts/en_us.affix "/usr/share/postgresql/$PG_VERSION/tsearch_data/en_us.affix" \
  && rm -rf ${PG_HOME} \
