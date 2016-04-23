@@ -326,7 +326,7 @@ load_extensions() {
 
 load_textsearch() {
     psql -U ${PG_USER} -c "CREATE SCHEMA IF NOT EXISTS zulip AUTHORIZATION zulip;" zulip >/dev/null
-    psql -U ${PG_USER} -c "CREATE EXTENSION IF NOT EXISTS tsearch_extras IF NOT EXISTS SCHEMA zulip;" zulip >/dev/null
+    psql -U ${PG_USER} -c "CREATE EXTENSION IF NOT EXISTS tsearch_extras SCHEMA zulip;" zulip >/dev/null
 }
 
 create_database() {
