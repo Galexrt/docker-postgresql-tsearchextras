@@ -1,5 +1,7 @@
 # galexrt/docker-zulip-postgresql-tsearchextras:latest
 
+[![](https://images.microbadger.com/badges/image/galexrt/zulip-postgresql-tsearchextras.svg)](https://microbadger.com/images/galexrt/zulip-postgresql-tsearchextras "Get your own image badge on microbadger.com")
+
 - [Introduction](#introduction)
   - [Contributing](#contributing)
   - [Issues](#issues)
