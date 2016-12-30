@@ -9,6 +9,7 @@ Image available from:
 * [**Docker Hub**](https://hub.docker.com/r/galexrt/zulip-postgresql-tsearchextras)
 
 This image was orignally created by [Github User sameersbn](https://github.com/sameersbn).
+
 This image is only intended for use with the [galexrt/docker-zulip-postgresql-tsearchextras Docker image]().
 
 ***
