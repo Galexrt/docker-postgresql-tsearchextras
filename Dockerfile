@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20160416
+FROM sameersbn/ubuntu:14.04.20170123
 MAINTAINER galexrt@googlemail.com
 
 ENV PG_APP_HOME="/etc/docker-postgresql"\
@@ -13,7 +13,7 @@ ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin \
     PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
- && wget -qO - https://zulip.com/dist/keys/zulip-ppa.asc | apt-key add - \
+ && wget --quiet -O - https://zulip.org/dist/keys/zulip-ppa.asc | apt-key add - \
  && echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
  && echo "deb http://ppa.launchpad.net/tabbott/zulip/ubuntu trusty main" > /etc/apt/sources.list.d/zulip.list \
  && apt-get update \
@@ -30,6 +30,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 
 COPY runtime/ ${PG_APP_HOME}/
 COPY entrypoint.sh /sbin/entrypoint.sh
+RUN chmod 755 /sbin/entrypoint.sh
 COPY zulip_english.stop "/usr/share/postgresql/$PG_VERSION/tsearch_data/zulip_english.stop"
 
 EXPOSE 5432/tcp
