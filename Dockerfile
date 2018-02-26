@@ -1,5 +1,5 @@
 FROM sameersbn/ubuntu:14.04.20170123
-MAINTAINER galexrt@googlemail.com
+LABEL maintainer="galexrt@googlemail.com"
 
 ENV PG_APP_HOME="/etc/docker-postgresql"\
     PG_VERSION=9.3 \
