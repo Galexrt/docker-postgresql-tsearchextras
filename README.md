@@ -89,9 +89,11 @@ Start PostgreSQL using:
 ```bash
 docker run --name postgresql -itd --restart always \
   --publish 5432:5432 \
-  --volume /srv/docker/postgresql:/var/lib/postgresql \
+  -v /srv/docker/postgresql:/var/lib/postgresql \
   galexrt/zulip-postgresql-tsearchextras:latest
 ```
+
+If you are on an OS that uses SELinux, add `:z` after the container path.
 
 Login to the PostgreSQL server using:
 
